@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .link-container {
+            margin: 20px;
+        }
+        .chatbot {
+            display: none;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .chatbot .messages {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .chatbot .input-container {
+            display: flex;
+            gap: 10px;
+        }
+        .chatbot .input-container input {
+            flex: 1;
+            padding: 5px;
+        }
+        .chatbot .input-container button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, Rohit Madasu</h1>
+    </header>
+    <div class="link-container">
+        <a href="#" class="chat-link" data-chatbot="gemini">Gemini</a>
+        <div id="gemini-chat" class="chatbot">
+            Gemini Chatbot
+            <div class="messages"></div>
+            <div class="input-container">
+                <input type="text" placeholder="Type your message..." class="user-input">
+                <button class="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="link-container">
+        <a href="#" class="chat-link" data-chatbot="chatgpt">ChatGPT</a>
+        <div id="chatgpt-chat" class="chatbot">
+            ChatGPT Chatbot
+            <div class="messages"></div>
+            <div class="input-container">
+                <input type="text" placeholder="Type your message..." class="user-input">
+                <button class="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="link-container">
+        <a href="#" class="chat-link" data-chatbot="deepseek">DeepSeek</a>
+        <div id="deepseek-chat" class="chatbot">
+            DeepSeek Chatbot
+            <div class="messages"></div>
+            <div class="input-container">
+                <input type="text" placeholder="Type your message..." class="user-input">
+                <button class="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="link-container">
+        <a href="#" class="chat-link" data-chatbot="claude">Claude</a>
+        <div id="claude-chat" class="chatbot">
+            Claude Chatbot
+            <div class="messages"></div>
+            <div class="input-container">
+                <input type="text" placeholder="Type your message..." class="user-input">
+                <button class="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.chat-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const chatbotId = this.getAttribute('data-chatbot') + '-chat';
+                const chatbot = document.getElementById(chatbotId);
+                chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        document.querySelectorAll('.send-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const inputContainer = this.parentElement;
+                const userInput = inputContainer.querySelector('.user-input');
+                const messagesContainer = inputContainer.parentElement.querySelector('.messages');
+
+                const userMessage = userInput.value.trim();
+                if (userMessage) {
+                    // Display user message
+                    const userMessageElement = document.createElement('div');
+                    userMessageElement.textContent = `You: ${userMessage}`;
+                    messagesContainer.appendChild(userMessageElement);
+
+                    // Determine chatbot type and send POST request
+                    const chatbotId = inputContainer.parentElement.id;
+                    let url = '';
+
+                    switch (chatbotId) {
+                        case 'gemini-chat':
+                            url = 'https://rohitmadasu.com/gemini';
+                            break;
+                        case 'chatgpt-chat':
+                            url = 'https://rohitmadasu.com/chatgpt';
+                            break;
+                        case 'deepseek-chat':
+                            url = 'https://rohitmadasu.com/deepseek';
+                            break;
+                        case 'claude-chat':
+                            url = 'https://rohitmadasu.com/claude';
+                            break;
+                    }
+
+                    if (url) {
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ message: userMessage })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Simulate chatbot response
+                            const botMessageElement = document.createElement('div');
+                            botMessageElement.textContent = `Bot: ${data.response || 'I received your message.'}`;
+                            messagesContainer.appendChild(botMessageElement);
+
+                            // Scroll to the latest message
+                            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                        })
+                        .catch(error => {
+                            const errorMessageElement = document.createElement('div');
+                            errorMessageElement.textContent = `Bot: Error sending message.`;
+                            messagesContainer.appendChild(errorMessageElement);
+                        });
+                    }
+
+                    // Clear input field
+                    userInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
