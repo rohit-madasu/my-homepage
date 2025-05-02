@@ -17,6 +17,16 @@
             color: white;
             position: relative;
         }
+        .clock {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: right;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
         .container {
             padding: 1.5rem;
             margin-top: 2rem;
@@ -145,6 +155,7 @@
                 <li><a href="https://coursehunter.net">CourseHunter</a></li>
                 <li><a href="https://coursetrain.net">CourseTrain</a></li>
                 <li><a href="https://codewithmosh.com">Mosh</a></li>
+                <li><a href="https://www.durgasoftonline.com/">Durga Soft</a></li>
             </ul>
         </section>
 
@@ -182,5 +193,32 @@
         <p>Choose to work towards the goal, for work and success is a choice.</p>
         <p>Empty your mind, heart and just work towards the greater goal.</p>
     </div>
+    
+    <div class="clock" id="clock"></div>
+    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const options = { 
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true,
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            };
+            
+            const timeString = now.toLocaleString('en-IN', options);
+            document.getElementById('clock').innerHTML = timeString;
+        }
+        
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        
+        // Initial call to display clock immediately
+        updateClock();
+    </script>
 </body>
 </html>
