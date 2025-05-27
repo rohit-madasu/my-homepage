@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My 3D Portfolio Adventure</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>My 3D Portfolio Adventure</h1>
+    </header>
+
+    <main>
+        <div id="info-panel">
+            <!-- Route selection removed for free-roam -->
+            <div id="controls-info">
+                <h2>🚗 Infinite Racing Adventure</h2>
+                <p>Experience endless driving with full map coverage! Drive anywhere without restrictions!</p>
+                <div id="features-info">
+                    <h3>🌟 NEW: Infinite Terrain System</h3>
+                    <ul>
+                        <li>🌍 <strong>INFINITE TERRAIN:</strong> Procedural chunk generation - drive forever!</li>
+                        <li>🎯 <strong>NO BOUNDARIES:</strong> Never hit an edge - truly endless exploration</li>
+                        <li>🔄 <strong>UNRESTRICTED MOVEMENT:</strong> Full 360° rotation + complete map coverage!</li>
+                        <li>📷 <strong>RACING CAMERAS:</strong> Professional camera system with 3 modes</li>
+                        <li>🏆 <strong>PROCEDURAL ACHIEVEMENTS:</strong> Discoveries generated as you explore</li>
+                        <li>⚡ <strong>OPTIMIZED:</strong> Efficient chunk streaming for 60fps performance</li>
+                        <li>🎮 Enhanced car physics with no movement restrictions</li>
+                        <li>🎨 Stunning 3D car model with metallic materials</li>
+                        <li>🌪️ Dynamic particle effects and smooth rotation</li>
+                        <li>📊 Real-time position tracking across infinite world</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-canvas-container">
+            <!-- 3D Canvas will be inserted here by Three.js -->
+            <div id="car-hud">
+                <div id="speedometer">
+                    <div class="hud-label">Speed</div>
+                    <div id="speed-value">0</div>
+                    <div class="hud-unit">km/h</div>
+                </div>
+                <div id="position-indicator">
+                    <div class="hud-label">Position</div>
+                    <div id="position-x">X: 0</div>
+                    <div id="position-z">Z: 0</div>
+                    <div class="hud-note">Infinite Terrain</div>
+                </div>
+                <div id="camera-indicator">
+                    <div class="hud-label">Camera</div>
+                    <div id="camera-mode">Chase</div>
+                    <div class="hud-note">Press C to switch</div>
+                </div>
+                <div id="controls-reminder">
+                    <div class="hud-label">Controls</div>
+                    <div class="control-key">W/↑ - Forward</div>
+                    <div class="control-key">S/↓ - Reverse</div>
+                    <div class="control-key">A/← - Turn Left</div>
+                    <div class="control-key">D/→ - Turn Right</div>
+                    <div class="control-key">C - Camera Mode</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="achievement-display" class="hidden">
+            <div id="achievement-content">
+                <h2 id="achievement-title"></h2>
+                <p id="achievement-description"></p>
+                <button id="close-achievement">Continue Journey</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Name - Portfolio</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
